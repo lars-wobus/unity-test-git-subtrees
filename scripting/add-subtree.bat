@@ -1,6 +1,7 @@
 SET RepositoryUrl="https://github.com/lars-wobus/unity-test-git-submodules"
 SET RepositoryName="unity-test-git-submodules"
 SET LocalDirectory="subtrees/"%RepositoryName%
+SET ForkedRepositoryName="XX"
 SET ForkedRepositoryUrl="XXXX"
 
 :: Add local repository to refer to it in shorter form. Omit --squash to preserve the entire history of the subproject!
@@ -12,5 +13,8 @@ git fetch %RepositoryName% master
 git subtree pull --prefix %LocalDirectory% %RepositoryName% master --squash
 
 :: When original repository should be updated. Fork this repository, push changes to the new repo and create a pull request to inform author of the original repository.
-git remote add %RepositoryName% %ForkedRepositoryUrl%
-git subtree push --prefix=%LocalDirectory% %RepositoryName% master
+git remote add %ForkedRepositoryName% %ForkedRepositoryUrl%
+git subtree push --prefix=%LocalDirectory% %ForkedRepositoryName% master
+
+:: Check remote repositories
+git remote -v
